@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "859479165490",
+    "project_id": "fir-practicetechbrothers",
+    "storage_bucket": "fir-practicetechbrothers.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859479165490:android:1e356454611a5c712aca2b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase_practice_thetechbrothers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3vrI7GES9dtio9H6hJWl6BtQAn96s76k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
