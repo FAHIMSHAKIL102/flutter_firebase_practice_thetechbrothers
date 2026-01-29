@@ -12,6 +12,7 @@ class LoginScreen extends StatelessWidget {
         mainAxisAlignment: .center,
         crossAxisAlignment: .center,
         children: [
+          TextFormField(),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: RoundButton(title: 'Login', onTap: () {}),
