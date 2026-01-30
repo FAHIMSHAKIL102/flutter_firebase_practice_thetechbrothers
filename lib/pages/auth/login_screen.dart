@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/widgets/round_button.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +28,51 @@ class LoginScreen extends StatelessWidget {
         mainAxisAlignment: .center,
         crossAxisAlignment: .center,
         children: [
-          TextFormField(),
+          Form(
+            key: _formkey,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                    prefixIcon: Icon(Icons.email_outlined),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter Email';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    hintText: 'Passwword',
+                    suffixIcon: Icon(Icons.visibility_off),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter Password';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: RoundButton(title: 'Login', onTap: () {}),
+            child: RoundButton(
+              title: 'Login',
+              onTap: () {
+                if (_formkey.currentState!.validate()) {}
+              },
+            ),
           ),
         ],
       ),
