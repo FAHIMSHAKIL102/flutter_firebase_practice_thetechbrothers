@@ -30,38 +30,47 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Form(
             key: _formkey,
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    prefixIcon: Icon(Icons.email_outlined),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                      prefixIcon: Icon(Icons.email_outlined),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.purple),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter Email';
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter Email';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    hintText: 'Passwword',
-                    suffixIcon: Icon(Icons.visibility_off),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      hintText: 'Passwword',
+                      suffixIcon: Icon(Icons.visibility_off),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.purple),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter Password';
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter Password';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           SizedBox(height: 40),
