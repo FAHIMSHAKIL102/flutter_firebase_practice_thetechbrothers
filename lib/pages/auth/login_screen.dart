@@ -40,6 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: 'Email',
                       prefixIcon: Icon(Icons.email_outlined),
                       enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.purple),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: Colors.purple),
                       ),
                     ),
@@ -54,10 +59,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 20),
                   TextFormField(
                     controller: passwordController,
+                    obscureText: true,
                     decoration: InputDecoration(
                       hintText: 'Passwword',
                       suffixIcon: Icon(Icons.visibility_off),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.purple),
+                      ),
                       enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(color: Colors.purple),
                       ),
                     ),
