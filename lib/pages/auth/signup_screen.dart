@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/signup_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/widgets/round_button.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final _formkey = GlobalKey<FormState>();
 
   @override
@@ -24,8 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false,
-        title: Text('Login')),
+      appBar: AppBar(title: Text('Signup')),
       body: Column(
         mainAxisAlignment: .center,
         crossAxisAlignment: .center,
@@ -96,21 +96,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (_formkey.currentState!.validate()) {}
               },
             ),
-          ),
-          Row(
-            mainAxisAlignment: .center,
-            children: [
-              Text("Don't have account?"),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignupScreen()),
-                  );
-                },
-                child: Text('Singup'),
-              ),
-            ],
           ),
         ],
       ),
