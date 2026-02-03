@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintText: 'Passwword',
+                      hintText: 'Password',
                       prefixIcon: Icon(Icons.lock),
                       suffixIcon: Icon(Icons.visibility_off),
                       focusedBorder: OutlineInputBorder(

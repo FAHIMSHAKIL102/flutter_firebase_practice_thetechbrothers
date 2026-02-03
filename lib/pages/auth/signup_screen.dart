@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/utils/utils.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/widgets/round_button.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -10,10 +12,11 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
-
   final _formkey = GlobalKey<FormState>();
+  bool loading = false;
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
@@ -63,7 +66,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintText: 'Passwword',
+                      hintText: 'Password',
                       prefixIcon: Icon(Icons.lock),
                       suffixIcon: Icon(Icons.visibility_off),
                       focusedBorder: OutlineInputBorder(
@@ -91,9 +94,30 @@ class _SignupScreenState extends State<SignupScreen> {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: RoundButton(
-              title: 'Login',
+              title: 'Sign up',
+              loading: loading,
               onTap: () {
-                if (_formkey.currentState!.validate()) {}
+                if (_formkey.currentState!.validate()) {
+                  setState(() {
+                    loading = true;
+                  });
+                  _auth
+                      .createUserWithEmailAndPassword(
+                        email: emailController.text.toString(),
+                        password: passwordController.text.toString(),
+                      )
+                      .then((onValue) {
+                        setState(() {
+                          loading = false;
+                        });
+                      })
+                      .onError((handleError, stackTrace) {
+                        Utils().toastMessage(handleError.toString());
+                        setState(() {
+                          loading = false;
+                        });
+                      });
+                }
               },
             ),
           ),
