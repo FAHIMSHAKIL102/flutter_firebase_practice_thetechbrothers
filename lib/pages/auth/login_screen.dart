@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/signup_screen.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/utils/utils.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/widgets/round_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
@@ -21,11 +24,22 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
   }
 
+  void login() {
+    _auth
+        .signInWithEmailAndPassword(
+          email: emailController.text.toString(),
+          password: passwordController.text.toString(),
+        )
+        .then((onValue) {})
+        .onError((handleError, stackTrace) {
+          Utils().toastMessage(handleError.toString());
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false,
-        title: Text('Login')),
+      appBar: AppBar(automaticallyImplyLeading: false, title: Text('Login')),
       body: Column(
         mainAxisAlignment: .center,
         crossAxisAlignment: .center,
@@ -93,7 +107,9 @@ class _LoginScreenState extends State<LoginScreen> {
             child: RoundButton(
               title: 'Login',
               onTap: () {
-                if (_formkey.currentState!.validate()) {}
+                if (_formkey.currentState!.validate()) {
+                  login();
+                }
               },
             ),
           ),
