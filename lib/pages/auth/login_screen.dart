@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/signup_screen.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/pages/post_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/utils/utils.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/widgets/round_button.dart';
 
@@ -16,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
+  bool loading = false;
 
   @override
   void dispose() {
@@ -25,14 +27,28 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login() {
+    setState(() {
+      loading = true;
+    });
     _auth
         .signInWithEmailAndPassword(
           email: emailController.text.toString(),
           password: passwordController.text.toString(),
         )
-        .then((onValue) {})
+        .then((onValue) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PostScreen()),
+          );
+          setState(() {
+            loading = false;
+          });
+        })
         .onError((handleError, stackTrace) {
           Utils().toastMessage(handleError.toString());
+          setState(() {
+            loading = false;
+          });
         });
   }
 
@@ -106,6 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.all(20.0),
             child: RoundButton(
               title: 'Login',
+              loading: loading,
               onTap: () {
                 if (_formkey.currentState!.validate()) {
                   login();
