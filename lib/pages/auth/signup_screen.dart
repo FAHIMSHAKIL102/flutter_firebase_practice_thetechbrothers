@@ -121,6 +121,21 @@ class _SignupScreenState extends State<SignupScreen> {
               },
             ),
           ),
+          Row(
+            mainAxisAlignment: .center,
+            children: [
+              Text("Already have account?"),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignupScreen()),
+                  );
+                },
+                child: Text('Login'),
+              ),
+            ],
+          ),
         ],
       ),
     );
