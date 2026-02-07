@@ -145,6 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
+          Container(child: Center(child: Text('Login with phone'))),
         ],
       ),
     );
