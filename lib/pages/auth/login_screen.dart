@@ -145,7 +145,15 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
-          Container(child: Center(child: Text('Login with phone'))),
+          Container(
+            margin: EdgeInsets.all(20),
+            height: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.purple),
+            ),
+            child: Center(child: Text('Login with phone')),
+          ),
         ],
       ),
     );
