@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/login_with_phone_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/signup_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/post_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/utils/utils.dart';
@@ -145,14 +146,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
-          Container(
-            margin: EdgeInsets.all(20),
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.purple),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginWithPhoneScreen()),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.purple),
+                ),
+                child: Center(child: Text('Login with phone')),
+              ),
             ),
-            child: Center(child: Text('Login with phone')),
           ),
         ],
       ),
