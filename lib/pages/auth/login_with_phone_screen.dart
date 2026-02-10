@@ -9,10 +9,14 @@ class LoginWithPhoneScreen extends StatefulWidget {
 }
 
 class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
+  
   final phoneController = TextEditingController();
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Login')),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
