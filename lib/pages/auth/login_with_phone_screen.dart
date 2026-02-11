@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/veriffy_code_screen.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/utils/utils.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/widgets/round_button.dart';
 
 class LoginWithPhoneScreen extends StatefulWidget {
@@ -9,9 +12,9 @@ class LoginWithPhoneScreen extends StatefulWidget {
 }
 
 class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
-  
   final phoneController = TextEditingController();
   bool loading = false;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
           children: [
             SizedBox(height: 50),
             TextFormField(
+              keyboardType: TextInputType.phone,
               controller: phoneController,
               decoration: InputDecoration(
                 hintText: 'Enter Your Phone Number',
@@ -37,7 +41,48 @@ class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
               ),
             ),
             SizedBox(height: 50),
-            RoundButton(title: 'Login', onTap: () {}),
+            RoundButton(
+              title: 'Login',
+              loading: loading,
+
+              onTap: () {
+                setState(() {
+                  loading = true;
+                });
+                auth.verifyPhoneNumber(
+                  phoneNumber: phoneController.text.toString(),
+                  verificationCompleted: (_) {
+                    setState(() {
+                      loading = false;
+                    });
+                  },
+                  verificationFailed: (e) {
+                    Utils().toastMessage(e.toString());
+                    setState(() {
+                      loading = false;
+                    });
+                  },
+                  codeSent: (String verificationId, int? token) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            VeriffyCodeScreen(verificationId: verificationId),
+                      ),
+                    );
+                    setState(() {
+                      loading = false;
+                    });
+                  },
+                  codeAutoRetrievalTimeout: (e) {
+                    Utils().toastMessage(e.toString());
+                    setState(() {
+                      loading = false;
+                    });
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),
