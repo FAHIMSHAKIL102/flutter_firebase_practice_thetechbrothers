@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.purple),
                 ),
-                child: Center(child: Text('Login with phone')),
+                child: Center(child: Text('Login with Phone  Number')),
               ),
             ),
           ),
