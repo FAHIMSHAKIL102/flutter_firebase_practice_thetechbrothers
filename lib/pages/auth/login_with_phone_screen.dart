@@ -42,7 +42,7 @@ class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
             ),
             SizedBox(height: 50),
             RoundButton(
-              title: 'Login',
+              title: 'Send Code',
               loading: loading,
 
               onTap: () {
