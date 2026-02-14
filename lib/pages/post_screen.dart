@@ -37,6 +37,7 @@ class _PostScreenState extends State<PostScreen> {
           SizedBox(width: 10),
         ],
       ),
+      body: Column(children: []),
     );
   }
 }
