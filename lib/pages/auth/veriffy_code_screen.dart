@@ -42,7 +42,7 @@ class _VeriffyCodeScreenState extends State<VeriffyCodeScreen> {
             ),
             SizedBox(height: 50),
             RoundButton(
-              title: 'Verify',
+              title: 'Verify Code',
               loading: loading,
               onTap: () async {
                 setState(() {
