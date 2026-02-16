@@ -20,7 +20,7 @@ class _VeriffyCodeScreenState extends State<VeriffyCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Verificcation')),
+      appBar: AppBar(title: Text('Verification')),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
