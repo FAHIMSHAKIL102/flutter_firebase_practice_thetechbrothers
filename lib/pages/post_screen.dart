@@ -37,7 +37,7 @@ class _PostScreenState extends State<PostScreen> {
           SizedBox(width: 10),
         ],
       ),
-      body: Column(children: [Text('Post Screen')]),
+      body: Column(children: [Center(child: Text('Post Screen'))]),
     );
   }
 }
