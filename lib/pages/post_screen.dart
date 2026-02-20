@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/pages/add_post_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/login_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/utils/utils.dart';
 
@@ -38,7 +39,18 @@ class _PostScreenState extends State<PostScreen> {
         ],
       ),
       body: Column(
-        children: [Center(child: Text('Post Screen', style: TextStyle(fontSize: 25)))],
+        children: [
+          Center(child: Text('Post Screen', style: TextStyle(fontSize: 25))),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddPostScreen()),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
