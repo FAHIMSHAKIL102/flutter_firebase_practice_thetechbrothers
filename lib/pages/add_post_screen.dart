@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/widgets/round_button.dart';
 
@@ -9,6 +10,10 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
+  final databaseRef = FirebaseDatabase.instance.ref('Post');
+  bool loading = false;
+  final postController= TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,11 +23,17 @@ class _AddPostScreenState extends State<AddPostScreen> {
         child: Column(
           children: [
             TextFormField(
+              controller: postController,
               maxLines: 4,
-              decoration: InputDecoration(hintText: 'What is in your mind....'),
+              decoration: InputDecoration(
+                hintText: 'What is in your mind....',
+                border: OutlineInputBorder(),
+              ),
             ),
             SizedBox(height: 40),
-            RoundButton(title: 'Add', onTap: () {}),
+            RoundButton(title: 'Add', onTap: () {
+              databaseRef.child('1').set({'id':1});
+            }),
           ],
         ),
       ),
