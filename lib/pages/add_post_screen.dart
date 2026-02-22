@@ -22,6 +22,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
+            SizedBox(height: 10),
             TextFormField(
               controller: postController,
               maxLines: 4,
