@@ -12,7 +12,7 @@ class AddPostScreen extends StatefulWidget {
 class _AddPostScreenState extends State<AddPostScreen> {
   final databaseRef = FirebaseDatabase.instance.ref('Post');
   bool loading = false;
-  final postController= TextEditingController();
+  final postController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +32,14 @@ class _AddPostScreenState extends State<AddPostScreen> {
               ),
             ),
             SizedBox(height: 40),
-            RoundButton(title: 'Add', onTap: () {
-              databaseRef.child('1').set({'id':1});
-            }),
+            RoundButton(
+              title: 'Add',
+              onTap: () {
+                databaseRef.child('1').set({
+                  'title': postController.text.toString(),
+                });
+              },
+            ),
           ],
         ),
       ),
