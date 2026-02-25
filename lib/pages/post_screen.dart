@@ -12,7 +12,7 @@ class PostScreen extends StatefulWidget {
 }
 
 class _PostScreenState extends State<PostScreen> {
-  final _auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _PostScreenState extends State<PostScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              _auth
+              auth
                   .signOut()
                   .then((onValue) {
                     Navigator.push(

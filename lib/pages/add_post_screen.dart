@@ -10,6 +10,7 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
+
   final databaseRef = FirebaseDatabase.instance.ref('Post');
   bool loading = false;
   final postController = TextEditingController();
@@ -22,7 +23,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            SizedBox(height: 10),
             TextFormField(
               controller: postController,
               maxLines: 4,
@@ -36,7 +36,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               title: 'Add',
               onTap: () {
                 databaseRef.child('1').set({
-                  'title': postController.text.toString(),
+                  'title': postController.text.toString()
                 });
               },
             ),
