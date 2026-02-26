@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/widgets/round_button.dart';
@@ -11,7 +12,11 @@ class AddPostScreen extends StatefulWidget {
 
 class _AddPostScreenState extends State<AddPostScreen> {
 
-  final databaseRef = FirebaseDatabase.instance.ref('Post');
+static const databaseURL = 'https://fir-practicetechbrothers-default-rtdb.asia-southeast1.firebasedatabase.app';
+late final DatabaseReference databaseRef = FirebaseDatabase.instanceFor(
+  app: Firebase.app(), // Optional, if you have multiple Firebase apps
+  databaseURL: databaseURL,
+).ref("your_data_path");
   bool loading = false;
   final postController = TextEditingController();
 
