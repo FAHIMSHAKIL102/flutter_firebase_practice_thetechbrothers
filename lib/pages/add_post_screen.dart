@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/utils/utils.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/widgets/round_button.dart';
 
 class AddPostScreen extends StatefulWidget {
@@ -11,12 +12,12 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
-
-static const databaseURL = 'https://fir-practicetechbrothers-default-rtdb.asia-southeast1.firebasedatabase.app';
-late final DatabaseReference databaseRef = FirebaseDatabase.instanceFor(
-  app: Firebase.app(), // Optional, if you have multiple Firebase apps
-  databaseURL: databaseURL,
-).ref("your_data_path");
+  static const databaseURL =
+      'https://fir-practicetechbrothers-default-rtdb.asia-southeast1.firebasedatabase.app';
+  late final DatabaseReference databaseRef = FirebaseDatabase.instanceFor(
+    app: Firebase.app(), // Optional, if you have multiple Firebase apps
+    databaseURL: databaseURL,
+  ).ref("Post");
   bool loading = false;
   final postController = TextEditingController();
 
@@ -39,10 +40,29 @@ late final DatabaseReference databaseRef = FirebaseDatabase.instanceFor(
             SizedBox(height: 40),
             RoundButton(
               title: 'Add',
+              loading: loading,
               onTap: () {
-                databaseRef.child('1').set({
-                  'title': postController.text.toString()
+                setState(() {
+                  loading = true;
                 });
+                databaseRef
+                    .child(DateTime.now().millisecondsSinceEpoch.toString())
+                    .set({
+                      'id': 'Fahim',
+                      'title': postController.text.toString(),
+                    })
+                    .then((onValue) {
+                      Utils().toastMessage('Post');
+                      setState(() {
+                        loading = false;
+                      });
+                    })
+                    .onError((handleError, stackTrace) {
+                      Utils().toastMessage(handleError.toString());
+                      setState(() {
+                        loading = false;
+                      });
+                    });
               },
             ),
           ],
