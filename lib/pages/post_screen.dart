@@ -38,10 +38,9 @@ class _PostScreenState extends State<PostScreen> {
           SizedBox(width: 10),
         ],
       ),
-      body: Column(mainAxisAlignment: .center,
-        children: [
-          Center(child: Text('Post Screen', style: TextStyle(fontSize: 25))),
-        ],
+      body: Column(
+        mainAxisAlignment: .center,
+        children: [ListTile(title: Text('Hello'))],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
