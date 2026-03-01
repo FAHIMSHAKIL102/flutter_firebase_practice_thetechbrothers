@@ -1,4 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/add_post_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/login_screen.dart';
@@ -13,6 +16,13 @@ class PostScreen extends StatefulWidget {
 
 class _PostScreenState extends State<PostScreen> {
   final auth = FirebaseAuth.instance;
+  static const databaseURL =
+      'https://fir-practicetechbrothers-default-rtdb.asia-southeast1.firebasedatabase.app';
+  late final DatabaseReference ref = FirebaseDatabase.instanceFor(
+    app: Firebase.app(), // Optional, if you have multiple Firebase apps
+    databaseURL: databaseURL,
+  ).ref("Post");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +50,21 @@ class _PostScreenState extends State<PostScreen> {
       ),
       body: Column(
         mainAxisAlignment: .center,
-        children: [ListTile(title: Text('Hello'))],
+        crossAxisAlignment: .center,
+        children: [
+          Expanded(
+            child: FirebaseAnimatedList(
+              defaultChild: Text('Loading'),
+              query: ref,
+              itemBuilder: (context, snapshot, animation, index) {
+                return ListTile(
+                  title: Text(snapshot.child('title').value.toString()),
+                  subtitle: Text(snapshot.child('id').value.toString()),
+                );
+              },
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
