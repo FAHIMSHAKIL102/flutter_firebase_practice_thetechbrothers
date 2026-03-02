@@ -52,6 +52,9 @@ class _PostScreenState extends State<PostScreen> {
         mainAxisAlignment: .center,
         crossAxisAlignment: .center,
         children: [
+          Expanded(child: StreamBuilder(stream: ref.onValue, builder: (context, snapshot){
+            return ListTile(title: Text('Fahim Shakil'),);
+          }),),
           Expanded(
             child: FirebaseAnimatedList(
               defaultChild: Text('Loading'),
