@@ -52,9 +52,37 @@ class _PostScreenState extends State<PostScreen> {
         mainAxisAlignment: .center,
         crossAxisAlignment: .center,
         children: [
-          Expanded(child: StreamBuilder(stream: ref.onValue, builder: (context, snapshot){
-            return ListTile(title: Text('Fahim Shakil'),);
-          }),),
+          Expanded(
+            child: StreamBuilder(
+              stream: ref.onValue,
+              builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else {
+                  Map<dynamic, dynamic> map =
+                      snapshot.data!.snapshot.value as dynamic;
+                  List<dynamic> list = [];
+                  list.clear();
+                  list = map.values.toList();
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(list[index]['title']),
+                        subtitle: Text(list[index]['id']),
+                      );
+                    },
+                    itemCount: snapshot.data!.snapshot.children.length,
+                  );
+                }
+              },
+            ),
+          ),
           Expanded(
             child: FirebaseAnimatedList(
               defaultChild: Text('Loading'),
