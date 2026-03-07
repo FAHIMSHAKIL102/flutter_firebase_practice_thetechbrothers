@@ -76,10 +76,7 @@ class _PostScreenState extends State<PostScreen> {
                       final item = list[index];
                       final title = item['title']?.toString() ?? '';
                       final id = item['id']?.toString() ?? '';
-                      return ListTile(
-                        title: Text(title),
-                        subtitle: Text(id),
-                      );
+                      return ListTile(title: Text(title), subtitle: Text(id));
                     },
                     itemCount: snapshot.data!.snapshot.children.length,
                   );
@@ -89,7 +86,12 @@ class _PostScreenState extends State<PostScreen> {
           ),
           Expanded(
             child: FirebaseAnimatedList(
-              defaultChild: Text('Loading'),
+              defaultChild: Center(
+                child: Text(
+                  'Loading',
+                  style: TextStyle(fontSize: 25, color: Colors.purple),
+                ),
+              ),
               query: ref,
               itemBuilder: (context, snapshot, animation, index) {
                 return ListTile(
