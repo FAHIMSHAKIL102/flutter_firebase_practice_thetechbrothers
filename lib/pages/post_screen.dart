@@ -22,6 +22,7 @@ class _PostScreenState extends State<PostScreen> {
     app: Firebase.app(), // Optional, if you have multiple Firebase apps
     databaseURL: databaseURL,
   ).ref("Post");
+  final searchFilterController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class _PostScreenState extends State<PostScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text('Post'),
+        backgroundColor: Colors.purple,
         actions: [
           IconButton(
             onPressed: () {
@@ -53,6 +55,56 @@ class _PostScreenState extends State<PostScreen> {
         mainAxisAlignment: .center,
         crossAxisAlignment: .center,
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: searchFilterController,
+              decoration: InputDecoration(
+                hintText: 'Search',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (String value) {
+                setState(() {});
+              },
+            ),
+          ),
+          Expanded(
+            child: FirebaseAnimatedList(
+              defaultChild: Center(
+                child: Text(
+                  'Loading',
+                  style: TextStyle(fontSize: 25, color: Colors.purple),
+                ),
+              ),
+              query: ref,
+              itemBuilder: (context, snapshot, animation, index) {
+                final title = snapshot.child('title').value?.toString() ?? '';
+                if (searchFilterController.text.isEmpty) {
+                  return ListTile(
+                    title: Text(
+                      snapshot.child('title').value?.toString() ?? '',
+                    ),
+                    subtitle: Text(
+                      snapshot.child('id').value?.toString() ?? '',
+                    ),
+                  );
+                } else if (title.toLowerCase().contains(
+                  searchFilterController.text.toLowerCase().toString(),
+                )) {
+                  return ListTile(
+                    title: Text(
+                      snapshot.child('title').value?.toString() ?? '',
+                    ),
+                    subtitle: Text(
+                      snapshot.child('id').value?.toString() ?? '',
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
+          ),
           Expanded(
             child: StreamBuilder(
               stream: ref.onValue,
@@ -81,23 +133,6 @@ class _PostScreenState extends State<PostScreen> {
                     itemCount: snapshot.data!.snapshot.children.length,
                   );
                 }
-              },
-            ),
-          ),
-          Expanded(
-            child: FirebaseAnimatedList(
-              defaultChild: Center(
-                child: Text(
-                  'Loading',
-                  style: TextStyle(fontSize: 25, color: Colors.purple),
-                ),
-              ),
-              query: ref,
-              itemBuilder: (context, snapshot, animation, index) {
-                return ListTile(
-                  title: Text(snapshot.child('title').value?.toString() ?? ''),
-                  subtitle: Text(snapshot.child('id').value?.toString() ?? ''),
-                );
               },
             ),
           ),
