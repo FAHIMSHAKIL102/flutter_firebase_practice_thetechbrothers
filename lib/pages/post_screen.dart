@@ -87,6 +87,23 @@ class _PostScreenState extends State<PostScreen> {
                     subtitle: Text(
                       snapshot.child('id').value?.toString() ?? '',
                     ),
+                    trailing: PopupMenuButton(
+                      icon: Icon(Icons.more_vert),
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          child: ListTile(
+                            leading: Icon(Icons.edit),
+                            title: Text('Edit'),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          child: ListTile(
+                            leading: Icon(Icons.delete),
+                            title: Text('Delete'),
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 } else if (title.toLowerCase().contains(
                   searchFilterController.text.toLowerCase().toString(),
