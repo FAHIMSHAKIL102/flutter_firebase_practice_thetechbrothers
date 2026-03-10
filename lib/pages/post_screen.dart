@@ -81,9 +81,7 @@ class _PostScreenState extends State<PostScreen> {
                 final title = snapshot.child('title').value?.toString() ?? '';
                 if (searchFilterController.text.isEmpty) {
                   return ListTile(
-                    title: Text(
-                      snapshot.child('title').value?.toString() ?? '',
-                    ),
+                    title: Text(title),
                     subtitle: Text(
                       snapshot.child('id').value?.toString() ?? '',
                     ),
@@ -109,9 +107,7 @@ class _PostScreenState extends State<PostScreen> {
                   searchFilterController.text.toLowerCase().toString(),
                 )) {
                   return ListTile(
-                    title: Text(
-                      snapshot.child('title').value?.toString() ?? '',
-                    ),
+                    title: Text(title),
                     subtitle: Text(
                       snapshot.child('id').value?.toString() ?? '',
                     ),
