@@ -162,4 +162,6 @@ class _PostScreenState extends State<PostScreen> {
       ),
     );
   }
+
+  Future<void> showMyDialog ()async{}
 }
