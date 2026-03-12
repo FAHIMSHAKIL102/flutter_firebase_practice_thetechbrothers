@@ -23,6 +23,7 @@ class _PostScreenState extends State<PostScreen> {
     databaseURL: databaseURL,
   ).ref("Post");
   final searchFilterController = TextEditingController();
+  final editController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -79,23 +80,29 @@ class _PostScreenState extends State<PostScreen> {
               query: ref,
               itemBuilder: (context, snapshot, animation, index) {
                 final title = snapshot.child('title').value?.toString() ?? '';
+                final id = snapshot.child('id').value?.toString() ?? '';
                 if (searchFilterController.text.isEmpty) {
                   return ListTile(
                     title: Text(title),
-                    subtitle: Text(
-                      snapshot.child('id').value?.toString() ?? '',
-                    ),
+                    subtitle: Text(id),
                     trailing: PopupMenuButton(
                       icon: Icon(Icons.more_vert),
                       itemBuilder: (context) => [
                         PopupMenuItem(
                           child: ListTile(
+                            onTap: () {
+                              Navigator.pop(context);
+                              showMyDialog(title, id);
+                            },
                             leading: Icon(Icons.edit),
                             title: Text('Edit'),
                           ),
                         ),
                         PopupMenuItem(
                           child: ListTile(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                             leading: Icon(Icons.delete),
                             title: Text('Delete'),
                           ),
@@ -163,5 +170,42 @@ class _PostScreenState extends State<PostScreen> {
     );
   }
 
-  Future<void> showMyDialog ()async{}
+  Future<void> showMyDialog(String title, String id) async {
+    editController.text = title;
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Edit'),
+          content: Container(child: TextField(controller: editController)),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                ref
+                    .child(DateTime.now().millisecondsSinceEpoch.toString())
+                    .update({
+                      'id': 'Fahim',
+                      'title': editController.text.toLowerCase(),
+                    })
+                    .then((onValue) {
+                      Utils().toastMessage('Post Updated');
+                    })
+                    .onError((handleError, stackTrace) {
+                      Utils().toastMessage(handleError.toString());
+                    });
+              },
+              child: Text('Update'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
