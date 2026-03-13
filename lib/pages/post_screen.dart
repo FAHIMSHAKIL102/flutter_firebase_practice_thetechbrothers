@@ -102,6 +102,10 @@ class _PostScreenState extends State<PostScreen> {
                           child: ListTile(
                             onTap: () {
                               Navigator.pop(context);
+                              ref
+                                  .child('id'
+                                  )
+                                  .remove();
                             },
                             leading: Icon(Icons.delete),
                             title: Text('Delete'),
