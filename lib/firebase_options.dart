@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '859479165490',
     projectId: 'fir-practicetechbrothers',
     authDomain: 'fir-practicetechbrothers.firebaseapp.com',
+    databaseURL: 'https://fir-practicetechbrothers-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fir-practicetechbrothers.firebasestorage.app',
     measurementId: 'G-6X6WJ4BB73',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:859479165490:android:1e356454611a5c712aca2b',
     messagingSenderId: '859479165490',
     projectId: 'fir-practicetechbrothers',
+    databaseURL: 'https://fir-practicetechbrothers-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fir-practicetechbrothers.firebasestorage.app',
   );
 
@@ -66,6 +68,7 @@ class DefaultFirebaseOptions {
     appId: '1:859479165490:ios:02f57f8e752c76052aca2b',
     messagingSenderId: '859479165490',
     projectId: 'fir-practicetechbrothers',
+    databaseURL: 'https://fir-practicetechbrothers-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fir-practicetechbrothers.firebasestorage.app',
     iosBundleId: 'com.example.flutterFirebasePracticeThetechbrothers',
   );
@@ -75,7 +78,9 @@ class DefaultFirebaseOptions {
     appId: '1:859479165490:ios:02f57f8e752c76052aca2b',
     messagingSenderId: '859479165490',
     projectId: 'fir-practicetechbrothers',
+    databaseURL: 'https://fir-practicetechbrothers-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'fir-practicetechbrothers.firebasestorage.app',
     iosBundleId: 'com.example.flutterFirebasePracticeThetechbrothers',
   );
+
 }
