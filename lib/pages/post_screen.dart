@@ -38,7 +38,7 @@ class _PostScreenState extends State<PostScreen> {
               auth
                   .signOut()
                   .then((onValue) {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => LoginScreen()),
                     );
@@ -103,7 +103,7 @@ class _PostScreenState extends State<PostScreen> {
                             onTap: () {
                               Navigator.pop(context);
                               ref
-                                  .child('id'
+                                  .child(id
                                   )
                                   .remove();
                             },
@@ -128,38 +128,38 @@ class _PostScreenState extends State<PostScreen> {
                 }
               },
             ),
-          ),
-          Expanded(
-            child: StreamBuilder(
-              stream: ref.onValue,
-              builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else {
-                  Map<dynamic, dynamic> map =
-                      snapshot.data!.snapshot.value as dynamic;
-                  List<dynamic> list = [];
-                  list.clear();
-                  list = map.values.toList();
-                  return ListView.builder(
-                    itemBuilder: (context, index) {
-                      final item = list[index];
-                      final title = item['title']?.toString() ?? '';
-                      final id = item['id']?.toString() ?? '';
-                      return ListTile(title: Text(title), subtitle: Text(id));
-                    },
-                    itemCount: snapshot.data!.snapshot.children.length,
-                  );
-                }
-              },
-            ),
-          ),
+           ),
+          // Expanded(
+          //   child: StreamBuilder(
+          //     stream: ref.onValue,
+          //     builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+          //       if (!snapshot.hasData) {
+          //         return Center(
+          //           child: SizedBox(
+          //             height: 20,
+          //             width: 20,
+          //             child: CircularProgressIndicator(),
+          //           ),
+          //         );
+          //       } else {
+          //         Map<dynamic, dynamic> map =
+          //             snapshot.data!.snapshot.value as dynamic;
+          //         List<dynamic> list = [];
+          //         list.clear();
+          //         list = map.values.toList();
+          //         return ListView.builder(
+          //           itemBuilder: (context, index) {
+          //             final item = list[index];
+          //             final title = item['title']?.toString() ?? '';
+          //             final id = item['id']?.toString() ?? '';
+          //             return ListTile(title: Text(title), subtitle: Text(id));
+          //           },
+          //           itemCount: snapshot.data!.snapshot.children.length,
+          //         );
+          //       }
+          //     },
+          //   ),
+          // ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -193,9 +193,8 @@ class _PostScreenState extends State<PostScreen> {
               onPressed: () {
                 Navigator.pop(context);
                 ref
-                    .child(DateTime.now().millisecondsSinceEpoch.toString())
+                    .child(id)
                     .update({
-                      'id': 'Fahim',
                       'title': editController.text.toLowerCase(),
                     })
                     .then((onValue) {

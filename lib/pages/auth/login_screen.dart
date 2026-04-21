@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
           password: passwordController.text.toString(),
         )
         .then((onValue) {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => PostScreen()),
           );
