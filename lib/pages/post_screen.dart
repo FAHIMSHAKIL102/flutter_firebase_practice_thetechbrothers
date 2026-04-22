@@ -5,6 +5,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/add_post_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/login_screen.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/pages/firestore/firestore_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/utils/utils.dart';
 
 class PostScreen extends StatefulWidget {
@@ -33,6 +34,15 @@ class _PostScreenState extends State<PostScreen> {
         title: Text('Post'),
         backgroundColor: Colors.purple,
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FirestoreScreen()),
+              );
+            },
+            icon: Icon(Icons.fireplace_outlined),
+          ),
           IconButton(
             onPressed: () {
               auth
@@ -102,10 +112,7 @@ class _PostScreenState extends State<PostScreen> {
                           child: ListTile(
                             onTap: () {
                               Navigator.pop(context);
-                              ref
-                                  .child(id
-                                  )
-                                  .remove();
+                              ref.child(id).remove();
                             },
                             leading: Icon(Icons.delete),
                             title: Text('Delete'),
@@ -128,7 +135,7 @@ class _PostScreenState extends State<PostScreen> {
                 }
               },
             ),
-           ),
+          ),
           Expanded(
             child: StreamBuilder(
               stream: ref.onValue,
@@ -194,9 +201,7 @@ class _PostScreenState extends State<PostScreen> {
                 Navigator.pop(context);
                 ref
                     .child(id)
-                    .update({
-                      'title': editController.text.toLowerCase(),
-                    })
+                    .update({'title': editController.text.toLowerCase()})
                     .then((onValue) {
                       Utils().toastMessage('Post Updated');
                     })
