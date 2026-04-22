@@ -181,7 +181,7 @@ class _PostScreenState extends State<PostScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Edit'),
-          content: Container(child: TextField(controller: editController)),
+          content: TextField(controller: editController),
           actions: [
             TextButton(
               onPressed: () {

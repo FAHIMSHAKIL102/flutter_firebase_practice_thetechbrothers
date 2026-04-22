@@ -55,7 +55,7 @@ class _AddFirestoreScreenState extends State<AddFirestoreScreen> {
                       });
                       Utils().toastMessage('Add');
                     })
-                    .onError((handleError, StackTrace) {
+                    .onError((handleError, stackTrace) {
                       setState(() {
                         loading = false;
                       });
