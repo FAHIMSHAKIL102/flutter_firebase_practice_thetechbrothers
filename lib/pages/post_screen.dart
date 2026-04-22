@@ -41,7 +41,7 @@ class _PostScreenState extends State<PostScreen> {
                 MaterialPageRoute(builder: (context) => FirestoreScreen()),
               );
             },
-            icon: Icon(Icons.fireplace_outlined),
+            icon: Icon(Icons.fireplace_outlined, color: Colors.white),
           ),
           IconButton(
             onPressed: () {
@@ -57,7 +57,7 @@ class _PostScreenState extends State<PostScreen> {
                     Utils().toastMessage(handleError.toString());
                   });
             },
-            icon: Icon(Icons.logout),
+            icon: Icon(Icons.logout, color: Colors.white),
           ),
           SizedBox(width: 10),
         ],
