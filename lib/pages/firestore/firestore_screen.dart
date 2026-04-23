@@ -29,10 +29,10 @@ class _FirestoreScreenState extends State<FirestoreScreen> {
           }
           return ListView.builder(
             itemBuilder: (context, index) {
-              final firestoreId = asyncSnapshot.data?.docs[index]['id']
-                  .toString()??'';
-              final firestoreTitle = asyncSnapshot.data?.docs[index]['title']
-                  .toString()??'';
+              final firestoreId =
+                  asyncSnapshot.data?.docs[index]['id'].toString() ?? '';
+              final firestoreTitle =
+                  asyncSnapshot.data?.docs[index]['title'].toString() ?? '';
               return ListTile(
                 onTap: () {
                   showFirestoreDialog(firestoreTitle, firestoreId);
@@ -72,7 +72,7 @@ class _FirestoreScreenState extends State<FirestoreScreen> {
   }
 
   Future<void> showFirestoreDialog(String title, String id) async {
-     editFirestoreController.text=title;
+    editFirestoreController.text = title;
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -90,7 +90,9 @@ class _FirestoreScreenState extends State<FirestoreScreen> {
               onPressed: () {
                 fireStore
                     .doc(id)
-                    .update({'title': editFirestoreController.text.toLowerCase()})
+                    .update({
+                      'title': editFirestoreController.text.toLowerCase(),
+                    })
                     .then((onValue) {
                       Utils().toastMessage('Updated');
                     })
