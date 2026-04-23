@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_practice_thetechbrothers/image_picker/upload_image_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/add_post_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/auth/login_screen.dart';
 import 'package:flutter_firebase_practice_thetechbrothers/pages/firestore/firestore_screen.dart';
@@ -31,9 +32,18 @@ class _PostScreenState extends State<PostScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Post'),
+        title: Text('Post', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.purple,
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UploadImageScreen()),
+              );
+            },
+            icon: Icon(Icons.image_outlined, color: Colors.white),
+          ),
           IconButton(
             onPressed: () {
               Navigator.push(
